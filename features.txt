@@ -1,0 +1,34 @@
+- track workouts
+    - Movements
+    - reps
+    - sets
+    - time
+    - volume
+    - muscles worked
+    - rest timer
+- Exercise database
+    -  primary/secondary muscles
+    - classification
+        - cable
+        - freeweight
+        - machine
+        - etc
+    - One rep pr
+    - volume pr
+    - Workout presets
+- user database
+    - weight tracker
+    - workout session history
+    - workout calendar planner
+    - General stats
+- calendar 
+    - view past workouts
+    - plan future workouts
+- Extras
+    - progressive overload AI advisor
+    - suggested workout presets
+    - preset builder
+    - social media esque features
+    - some reward/xp/ranking system
+    - an actually good ui
+    - creatine reminder

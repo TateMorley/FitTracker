@@ -1,0 +1,35 @@
+Phase 1 (MVP - 4-6 weeks):
+
+Basic workout tracking (movements, sets, reps, time)
+Simple exercise database with muscle groups
+Rest timer
+Local data storage
+Basic responsive UI
+
+===================================================
+
+Phase 2 (Core Features - 4-6 weeks):
+
+User accounts and workout history
+Weight tracker
+Exercise database with classifications
+Workout presets
+Calendar view
+
+===================================================
+
+Phase 3 (Advanced - 6+ weeks):
+
+Progressive overload suggestions
+Stats and analytics
+Better UI/UX polish
+PWA features (offline, notifications)
+
+===================================================
+
+Phase 4 (Extras):
+
+AI advisor features
+Social features
+XP/ranking system
+Creatine reminders
