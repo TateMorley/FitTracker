@@ -11,15 +11,9 @@ if (currentHour < 12) {
   greetingTime = "Evening";
 }
 
-function setGreeting(name) {
-  const greetingElement = document.getElementById("greeting");
-  if (greetingElement) {
-    if (name) {
-      greetingElement.textContent = `Good ${greetingTime}, ${name.split(" ")[0]}.`;
-    } else {
-      greetingElement.textContent = `Good ${greetingTime}!`;
-    }
-  }
+const greetingElement = document.getElementById("greeting");
+if (greetingElement) {
+  greetingElement.textContent = greeting;
 }
 
 // Set initial greeting (no name)
@@ -288,12 +282,12 @@ function initApp() {
 
 // Fetch and render exercises
 async function fetchAndRenderExercises() {
-  const res = await fetch('http://localhost:5000/api/exercises');
+  const res = await fetch("http://localhost:5000/api/exercises");
   const exercises = await res.json();
-  const list = document.getElementById('exercise-list');
-  list.innerHTML = '';
-  exercises.forEach(ex => {
-    const li = document.createElement('li');
+  const list = document.getElementById("exercise-list");
+  list.innerHTML = "";
+  exercises.forEach((ex) => {
+    const li = document.createElement("li");
     li.textContent = `${ex.name} (${ex.classification}) - PR: ${ex.oneRepPR} lbs`;
     list.appendChild(li);
   });
@@ -301,7 +295,7 @@ async function fetchAndRenderExercises() {
 
 // Calendar functionality
 function renderCalendar(year, month) {
-  const container = document.getElementById('calendar-container');
+  const container = document.getElementById("calendar-container");
   if (!container) return;
 
   const date = new Date(year, month, 1);
@@ -313,7 +307,7 @@ function renderCalendar(year, month) {
   let html = `<div class="calendar">
     <div class="calendar-header">
       <button id="prev-month">&lt;</button>
-      <span>${date.toLocaleString('default', { month: 'long' })} ${year}</span>
+      <span>${date.toLocaleString("default", { month: "long" })} ${year}</span>
       <button id="next-month">&gt;</button>
     </div>
     <div class="calendar-grid">
@@ -321,35 +315,42 @@ function renderCalendar(year, month) {
   `;
 
   // Empty cells before first day
-  for (let i = 0; i < firstDay; i++) html += '<div></div>';
+  for (let i = 0; i < firstDay; i++) html += "<div></div>";
 
   // Days of month
   for (let d = 1; d <= lastDate; d++) {
     html += `<div class="calendar-day" data-day="${d}">${d}</div>`;
   }
-  html += '</div></div>';
+  html += "</div></div>";
 
   container.innerHTML = html;
 
   // Month navigation
-  document.getElementById('prev-month').onclick = () => {
+  document.getElementById("prev-month").onclick = () => {
     renderCalendar(month === 0 ? year - 1 : year, month === 0 ? 11 : month - 1);
   };
-  document.getElementById('next-month').onclick = () => {
-    renderCalendar(month === 11 ? year + 1 : year, month === 11 ? 0 : month + 1);
+  document.getElementById("next-month").onclick = () => {
+    renderCalendar(
+      month === 11 ? year + 1 : year,
+      month === 11 ? 0 : month + 1
+    );
   };
 
   // Day click
-  container.querySelectorAll('.calendar-day').forEach(day => {
+  container.querySelectorAll(".calendar-day").forEach((day) => {
     day.onclick = () => {
-      alert(`You selected: ${year}-${String(month + 1).padStart(2, '0')}-${String(day.dataset.day).padStart(2, '0')}`);
+      alert(
+        `You selected: ${year}-${String(month + 1).padStart(2, "0")}-${String(
+          day.dataset.day
+        ).padStart(2, "0")}`
+      );
     };
   });
 }
 
 // Only run on calendar.html
-if (window.location.pathname.endsWith('calendar.html')) {
-  document.addEventListener('DOMContentLoaded', () => {
+if (window.location.pathname.endsWith("calendar.html")) {
+  document.addEventListener("DOMContentLoaded", () => {
     const today = new Date();
     renderCalendar(today.getFullYear(), today.getMonth());
   });
@@ -359,6 +360,6 @@ if (window.location.pathname.endsWith('calendar.html')) {
 document.addEventListener("DOMContentLoaded", initApp);
 
 // Call this after DOMContentLoaded, but only on the workouts page:
-if (window.location.pathname.endsWith('workouts.html')) {
+if (window.location.pathname.endsWith("workouts.html")) {
   fetchAndRenderExercises();
 }
