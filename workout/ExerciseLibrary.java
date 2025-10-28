@@ -12,7 +12,7 @@ public class ExerciseLibrary {
     public static final muscleGroup ABS = new muscleGroup("Abs", 3, new String[] { "Upper abs", "Lower abs", "Obliques" });
     public static final muscleGroup FOREARMS = new muscleGroup("Forearms", 2, new String[] { "Flexors", "Extensors" });
 
-    // Biceps Exercises--------------------------------------------
+    // BICEPS EXERCISES--------------------------------------------
     // Machine exercises
     public static final exercise MACHINE_CURL = new exercise("Machine Curl", BICEPS, "Long Head", exercise.Classification.MACHINE);
     public static final exercise PREACHER_CURL_MACHINE = new exercise("Preacher Curl Machine", BICEPS, "Short Head", exercise.Classification.MACHINE);
@@ -52,7 +52,7 @@ public class ExerciseLibrary {
     public static final exercise BODYWEIGHT_CURL = new exercise("Bodyweight Curl", BICEPS, "Long Head", exercise.Classification.CALISTHENIC);
     // Other exercises
 
-    // Triceps Exercises-------------------------------------------
+    // TRIPCES EXERCISES-------------------------------------------
     // Machine exercises
     public static final exercise TRICEP_PUSHDOWN_MACHINE = new exercise("Tricep Pushdown Machine", TRICEPS, "Lateral Head", exercise.Classification.MACHINE);
     public static final exercise OVERHEAD_TRICEP_EXTENSION_MACHINE = new exercise("Overhead Tricep Extension Machine", TRICEPS, "Long Head", exercise.Classification.MACHINE);
@@ -60,6 +60,8 @@ public class ExerciseLibrary {
     public static final exercise SMITH_JM_PRESS = new exercise("Smith JM Press", TRICEPS, "Long Head", exercise.Classification.MACHINE);
     public static final exercise SMITH_SKULLCRUSHER = new exercise("Smith Skullcrusher", TRICEPS, "Long Head", exercise.Classification.MACHINE);
     public static final exercise SMITH_CLOSE_GRIP_BENCH = new exercise("Smith Close Grip Bench", TRICEPS, "Lateral Head", exercise.Classification.MACHINE);
+    public static final exercise TRICEP_EXTENSION_MACHINE = new exercise("Tricep Extension Machine", TRICEPS, "Long Head", exercise.Classification.MACHINE);
+    public static final exercise ASSISTED_TRICEP_DIP_MACHINE = new exercise("Assisted Tricep Dip Machine", TRICEPS, "Medial Head", exercise.Classification.MACHINE);
     // Dumbbell exercises
     public static final exercise DUMBBELL_TRICEP_KICKBACK = new exercise("Dumbbell Tricep Kickback", TRICEPS, "Lateral Head", exercise.Classification.DUMBBELL);
     public static final exercise DUMBBELL_OVERHEAD_TRICEP_EXTENSION = new exercise("Dumbbell Overhead Tricep Extension", TRICEPS, "Long Head", exercise.Classification.DUMBBELL);
@@ -95,7 +97,7 @@ public class ExerciseLibrary {
     public static final exercise DIAMOND_PUSH_UP = new exercise("Diamond Push Up", TRICEPS, "Lateral Head", exercise.Classification.CALISTHENIC); 
     // Other exercises
 
-    // Chest Exercises---------------------------------------------
+    // CHEST EXERCISES---------------------------------------------
     // Machine exercises
     public static final exercise CHEST_PRESS_MACHINE = new exercise("Chest Press Machine", CHEST, "Lower Chest", exercise.Classification.MACHINE);
     public static final exercise PEC_DECK_MACHINE = new exercise("Pec Deck Machine", CHEST, "Upper Chest", exercise.Classification.MACHINE);
@@ -152,19 +154,69 @@ public class ExerciseLibrary {
     public static final exercise ARCHER_PUSH_UP = new exercise("Archer Push Up", CHEST, "Lower Chest", exercise.Classification.CALISTHENIC);
     // Other exercises
 
-    //TODO
-    // Back Exercises----------------------------------------------
+    // BACK EXERCISES----------------------------------------------
     // Machine exercises
     public static final exercise LAT_PULLODOWN_MACHINE = new exercise("Lat Pulldown Machine", BACK, "Lats", exercise.Classification.MACHINE);
-    public static final exercise NEUTRAL_GRIP_SEATED_ROW_MACHINE = new exercise("Seated Row Machine", BACK, "Lats", exercise.Classification.MACHINE);
-    public static final exercise WIDE_GRIP_SEATED_ROW_MACHINE = new exercise("Wide Grip Seated Row Machine", BACK, "Middle Back", exercise.Classification.MACHINE);
+    public static final exercise NEUTRAL_GRIP_ROW_MACHINE = new exercise("Neutral Grip Row Machine", BACK, "Lats", exercise.Classification.MACHINE);
+    public static final exercise WIDE_GRIP_ROW_MACHINE = new exercise("Wide Grip Row Machine", BACK, "Middle Back", exercise.Classification.MACHINE);
+    public static final exercise NEUTRAL_GRIP_SEATED_ROW = new exercise("Seated Row", BACK, "Lats", exercise.Classification.MACHINE);
+    public static final exercise WIDE_GRIP_SEATED_ROW = new exercise("Wide Grip Seated Row", BACK, "Middle Back", exercise.Classification.MACHINE);
+    public static final exercise MEDIUM_GRIP_SEATED_ROW = new exercise("Medium Grip Seated Row", BACK, "Middle Back", exercise.Classification.MACHINE);
+    public static final exercise NEUTRAL_GRIP_LAT_PULLDOWN = new exercise("Neutral Grip Lat Pulldown", BACK, "Lats", exercise.Classification.MACHINE);
+    public static final exercise MEDIUM_GRIP_LAT_PULLDOWN = new exercise("Medium Grip Lat Pulldown", BACK, "Lats", exercise.Classification.MACHINE);
+    public static final exercise MEDIUM_NEUTRAL_GRIP_LAT_PULLDOWN = new exercise("Medium Neutral Grip Lat Pulldown", BACK, "Lats", exercise.Classification.MACHINE);
+    public static final exercise WIDE_GRIP_LAT_PULLDOWN = new exercise("Wide Grip Lat Pulldown", BACK, "Lats", exercise.Classification.MACHINE);
+    public static final exercise WIDE_NEUTRAL_GRIP_LAT_PULLDOWN = new exercise("Wide Neutral Grip Lat Pulldown", BACK, "Lats", exercise.Classification.MACHINE);
+    public static final exercise BACK_EXTENSION_MACHINE = new exercise("Back Extension Machine", BACK, "Lower Back", exercise.Classification.MACHINE);
+    public static final exercise SMITH_BENT_OVER_ROW = new exercise("Smith Bent Over Row", BACK, "Lats", exercise.Classification.MACHINE);
+    public static final exercise LOW_ROW_MACHINE = new exercise("Low Row Machine", BACK, "Lats", exercise.Classification.MACHINE);
+    public static final exercise HIGH_ROW_MACHINE = new exercise("High Row Machine", BACK, "Lats", exercise.Classification.MACHINE);
+    public static final exercise KNEELING_CABLE_ROW = new exercise("Kneeling Cable Row", BACK, "Lats", exercise.Classification.MACHINE);
     // Dumbbell exercises
+    public static final exercise DUMBBELL_GORILLA_ROW = new exercise("Dumbbell Gorilla Row", BACK, "Lats", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_RENEGADE_ROW = new exercise("Dumbbell Renegade Row", BACK, "Lats", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_SHRUG = new exercise("Dumbbell Shrug", BACK, "Traps", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_BENT_OVER_ROW = new exercise("Dumbbell Bent Over Row", BACK, "Lats", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_INCLINE_ROW = new exercise("Dumbbell Incline Row", BACK, "Middle Back", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_LAT_PULLOVER = new exercise("Dumbbell Lat Pullover", BACK, "Lats", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_KELSO_SHRUG = new exercise("Dumbbell Kelso Shrug", BACK, "Middle Back", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_BACK_EXTENSION = new exercise("Dumbbell Back Extension", BACK, "Lower Back", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_WIDE_ROW = new exercise("Dumbbell Wide Row", BACK, "Middle Back", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_INCLINE_SHRUGS = new exercise("Dumbbell Incline Shrugs", BACK, "Traps", exercise.Classification.DUMBBELL);
     // Barbell exercises
+    public static final exercise BARBELL_BENT_OVER_ROW = new exercise("Barbell Bent Over Row", BACK, "Lats", exercise.Classification.BARBELL);
+    public static final exercise BARBELL_BENT_OVER_UNDERHAND_ROW = new exercise("Barbell Bent Over Underhand Row", BACK, "Lats", exercise.Classification.BARBELL);
+    public static final exercise BARBELL_SHRUG = new exercise("Barbell Shrug", BACK, "Traps", exercise.Classification.BARBELL);
     // Plate exercises
+    public static final exercise PLATE_LOADED_HIGH_ROW = new exercise("Plate Loaded High Row", BACK, "Lats", exercise.Classification.PLATE);
+    public static final exercise PLATE_LOADED_LOW_ROW = new exercise("Plate Loaded Low Row", BACK, "Lats", exercise.Classification.PLATE);
+    public static final exercise PLATE_LOADED_SHRUG = new exercise("Plate Loaded Shrug", BACK, "Traps", exercise.Classification.PLATE);
+    public static final exercise PLATE_LOADED_WIDE_ROW = new exercise("Plate Loaded Wide Row", BACK, "Lats", exercise.Classification.PLATE);
+    public static final exercise PLATE_LOADED_ROW = new exercise("Plate Loaded Row", BACK, "Lats", exercise.Classification.PLATE);
+    public static final exercise BENT_OVER_T_BAR_ROW = new exercise("Bent Over T-Bar Row", BACK, "Middle Back", exercise.Classification.PLATE);
+    public static final exercise SUPPORTED_T_BAR_ROW = new exercise("Supported T-Bar Row", BACK, "Middle Back", exercise.Classification.PLATE);
+    public static final exercise PLATE_LOADED_BACK_EXTENSION = new exercise("Plate Loaded Back Extension", BACK, "Lower Back", exercise.Classification.PLATE);
+    public static final exercise PLATE_LOADED_KELSO_SHRUG = new exercise("Plate Loaded Kelso Shrug", BACK, "Middle Back", exercise.Classification.PLATE);
+    public static final exercise PLATE_LOADED_LAT_PULLDOWN = new exercise("Plate Loaded Lat Pulldown", BACK, "Lats", exercise.Classification.PLATE);
+    public static final exercise PLATE_LOADED_LAT_PULLOVER = new exercise("Plate Loaded Lat Pullover", BACK, "Lats", exercise.Classification.PLATE);
+    public static final exercise PLATE_BACK_EXTENSION = new exercise("Plate Back Extension", BACK, "Lower Back", exercise.Classification.PLATE);
     // Cable exercises
+    public static final exercise CABLE_KNEELING_LAT_PULLDOWN = new exercise("Cable Kneeling Lat Pulldown", BACK, "Lats", exercise.Classification.CABLE);
+    public static final exercise CABLE_FACE_PULL = new exercise("Cable Face Pull", BACK, "Middle Back", exercise.Classification.CABLE);
+    public static final exercise CABLE_STRAIGHT_ARM_PULLOVER = new exercise("Cable Straight Arm Pullover", BACK, "Lats", exercise.Classification.CABLE);
+    public static final exercise CABLE_BENT_OVER_ROW = new exercise("Cable Bent Over Row", BACK, "Lats", exercise.Classification.CABLE);
+    public static final exercise CABLE_SHRUG = new exercise("Cable Shrugs", BACK, "Traps", exercise.Classification.CABLE);
+    public static final exercise CABLE_KEENAN_FLAPS = new exercise("Cable Keenan Flaps", BACK, "Lats", exercise.Classification.CABLE);
+    public static final exercise CABLE_LAT_PULL_AROUND = new exercise("Cable Lat Pull Around", BACK, "Lats", exercise.Classification.CABLE);
     // Calisthenic exercises
+    public static final exercise PULL_UP = new exercise("Pull Up", BACK, "Lats", exercise.Classification.CALISTHENIC);
+    public static final exercise CHIN_UP = new exercise("Chin Up", BACK, "Lats", exercise.Classification.CALISTHENIC);
+    public static final exercise BODYWEIGHT_ROW = new exercise("Bodyweight Row", BACK, "Middle Back", exercise.Classification.CALISTHENIC);
+    public static final exercise INVERTED_ROW = new exercise("Inverted Row", BACK, "Middle Back", exercise.Classification.CALISTHENIC);
+    public static final exercise BODYWEIGHT_BACK_EXTENSION = new exercise("Bodyweight Back Extension", BACK, "Lower Back", exercise.Classification.CALISTHENIC);
     // Other exercises
 
+    //TODO Finish the rest of the exercise library
     // Shoulder Exercises------------------------------------------
     // Machine exercises
     // Dumbbell exercises

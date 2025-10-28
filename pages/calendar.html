@@ -1,635 +1,804 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calendar - FitTracker</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../style.css" />
-  <script src="../script.js" defer></script>
-  <style>
-    body {
-      margin-top: 70px;
-      margin-bottom: 60px;
-    }
-
-    .calendar-container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .calendar-wrapper {
-      background: white;
-      border-radius: 15px;
-      padding: 25px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 10px rgba(15, 34, 43, 0.08);
-    }
-
-    .calendar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .calendar-header h2 {
-      margin: 0;
-      color: #0f222b;
-    }
-
-    .calendar-nav {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-    }
-
-    .calendar-nav button {
-      background: #4297a7;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 16px;
-      cursor: pointer;
-      font-family: "Roboto Slab", serif;
-      font-weight: 600;
-      transition: all 0.3s;
-    }
-
-    .calendar-nav button:hover {
-      background: #5ab0c1;
-      transform: translateY(-2px);
-    }
-
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 8px;
-    }
-
-    .calendar-day-header {
-      text-align: center;
-      font-weight: 700;
-      color: #1c3e4e;
-      padding: 10px 5px;
-      font-size: 14px;
-    }
-
-    .calendar-day {
-      aspect-ratio: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #f8fafb;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-      position: relative;
-      padding: 8px;
-    }
-
-    .calendar-day:hover {
-      background: #daedfa;
-      transform: scale(1.05);
-    }
-
-    .calendar-day.empty {
-      background: transparent;
-      cursor: default;
-    }
-
-    .calendar-day.empty:hover {
-      transform: none;
-    }
-
-    .calendar-day.today {
-      background: #4297a7;
-      color: white;
-      font-weight: 700;
-    }
-
-    .calendar-day.has-workout {
-      background: #28a745;
-      color: white;
-      font-weight: 600;
-    }
-
-    .calendar-day.has-plan {
-      background: #ffc107;
-      color: #0f222b;
-      font-weight: 600;
-    }
-
-    .day-number {
-      font-size: 16px;
-    }
-
-    .day-indicator {
-      font-size: 10px;
-      margin-top: 2px;
-    }
-
-    .legend {
-      display: flex;
-      gap: 20px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      color: #244f63;
-    }
-
-    .legend-box {
-      width: 20px;
-      height: 20px;
-      border-radius: 4px;
-    }
-
-    .legend-box.today {
-      background: #4297a7;
-    }
-
-    .legend-box.workout {
-      background: #28a745;
-    }
-
-    .legend-box.plan {
-      background: #ffc107;
-    }
-
-    /* Day Detail Modal */
-    .day-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 3000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .day-modal-content {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      max-width: 500px;
-      width: 90%;
-      max-height: 80vh;
-      overflow-y: auto;
-      position: relative;
-    }
-
-    .close-day-modal {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      color: #244f63;
-    }
-
-    .day-modal h3 {
-      color: #0f222b;
-      margin-bottom: 20px;
-    }
-
-    .workout-summary {
-      background: #f8fafb;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      border-left: 4px solid #4297a7;
-    }
-
-    .workout-summary h4 {
-      margin: 0 0 10px 0;
-      color: #1c3e4e;
-    }
-
-    .workout-summary p {
-      margin: 5px 0;
-      font-size: 14px;
-    }
-
-    .plan-form {
-      margin-top: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      color: #1c3e4e;
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .form-group input, .form-group textarea {
-      width: 100%;
-      padding: 10px;
-      border: 2px solid #daedfa;
-      border-radius: 8px;
-      font-family: "Roboto Slab", serif;
-      font-size: 14px;
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    .btn {
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      font-family: "Roboto Slab", serif;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .btn-primary {
-      background: #4297a7;
-      color: white;
-      width: 100%;
-    }
-
-    .btn-primary:hover {
-      background: #5ab0c1;
-    }
-
-    .btn-danger {
-      background: #dc3545;
-      color: white;
-      margin-top: 10px;
-      width: 100%;
-    }
-
-    .btn-danger:hover {
-      background: #e65661;
-    }
-
-    .empty-day {
-      text-align: center;
-      color: #244f63;
-      font-style: italic;
-      padding: 20px;
-    }
-
-    @media (max-width: 600px) {
-      .calendar-day {
-        font-size: 12px;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendar - FitTracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+    <style>
+      body {
+        margin-top: 70px;
+        margin-bottom: 60px;
       }
-      
-      .day-number {
+
+      .calendar-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .calendar-wrapper {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(15, 34, 43, 0.08);
+      }
+
+      .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .calendar-header h2 {
+        margin: 0;
+        color: #0f222b;
+      }
+
+      .calendar-nav {
+        display: flex;
+        margin-left: 15px;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .calendar-nav button {
+        background: #4297a7;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        cursor: pointer;
+        font-family: "Roboto Slab", serif;
+        font-weight: 600;
+        transition: all 0.3s;
+      }
+
+      .calendar-nav button:hover {
+        background: #5ab0c1;
+        transform: translateY(-2px);
+      }
+
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+      }
+
+      .calendar-day-header {
+        text-align: center;
+        font-weight: 700;
+        color: #1c3e4e;
+        padding: 10px 5px;
         font-size: 14px;
       }
-    }
-  </style>
-</head>
-<body>
-  <div class="top-header"></div>
 
-  <header class="top-header">
-    <div class="header-left">
-      <img src="../icons/plus.png" alt="Add" class="plus-icon" />
-    </div>
-    <div class="auth-buttons">
-      <button class="login-btn">Log in</button>
-      <button class="signup-btn">Sign up</button>
-    </div>
-  </header>
-
-  <div class="calendar-container">
-    <h1>Calendar</h1>
-    <p>Plan your workouts and track your <strong>training schedule</strong></p>
-
-    <div class="calendar-wrapper">
-      <div class="calendar-header">
-        <h2 id="currentMonth">January 2024</h2>
-        <div class="calendar-nav">
-          <button id="prevMonth">&lt; Prev</button>
-          <button id="todayBtn">Today</button>
-          <button id="nextMonth">Next &gt;</button>
-        </div>
-      </div>
-
-      <div class="calendar-grid" id="calendarGrid"></div>
-
-      <div class="legend">
-        <div class="legend-item">
-          <div class="legend-box today"></div>
-          <span>Today</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-box workout"></div>
-          <span>Completed Workout</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-box plan"></div>
-          <span>Planned Workout</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Day Detail Modal -->
-  <div id="dayModal" class="day-modal">
-    <div class="day-modal-content">
-      <button class="close-day-modal">&times;</button>
-      <h3 id="modalDate">January 1, 2024</h3>
-      <div id="modalContent"></div>
-    </div>
-  </div>
-
-  <!-- Bottom Navigation -->
-  <nav class="bottom-nav">
-    <a href="../index.html" class="nav-item">
-      <img src="../icons/home.png" alt="Home" class="nav-icon">
-      <span class="nav-text">Home</span>
-    </a>
-    <a href="calendar.html" class="nav-item active">
-      <img src="../icons/calendar.png" alt="Calendar" class="nav-icon">
-      <span class="nav-text">Calendar</span>
-    </a>
-    <a href="workouts.html" class="nav-item">
-      <img src="../icons/weight.png" alt="Workouts" class="nav-icon">
-      <span class="nav-text">Workouts</span>
-    </a>
-    <a href="stats.html" class="nav-item">
-      <img src="../icons/menu.png" alt="Stats" class="nav-icon">
-      <span class="nav-text">Stats</span>
-    </a>
-    <a href="settings.html" class="nav-item">
-      <img src="../icons/settings.png" alt="Settings" class="nav-icon">
-      <span class="nav-text">Settings</span>
-    </a>
-  </nav>
-
-  <!-- Login Modal -->
-  <div id="loginModal" class="auth-modal">
-    <div class="auth-modal-content">
-      <button class="close-modal">&times;</button>
-      <h3>Log In to FitTracker</h3>
-      <form class="auth-form" id="loginForm">
-        <input type="email" class="auth-input" placeholder="Email" required />
-        <input type="password" class="auth-input" placeholder="Password" required />
-        <button type="submit" class="auth-btn">Log In</button>
-      </form>
-      <div class="switch-auth">
-        <span>Don't have an account? </span>
-        <button class="switch-auth-btn" onclick="showSignupModal()">Sign Up</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Signup Modal -->
-  <div id="signupModal" class="auth-modal">
-    <div class="auth-modal-content">
-      <button class="close-modal">&times;</button>
-      <h3>Join FitTracker</h3>
-      <form class="auth-form" id="signupForm">
-        <input type="text" class="auth-input" placeholder="Full Name" required />
-        <input type="email" class="auth-input" placeholder="Email" required />
-        <input type="password" class="auth-input" placeholder="Password" required />
-        <input type="password" class="auth-input" placeholder="Confirm Password" required />
-        <button type="submit" class="auth-btn">Create Account</button>
-      </form>
-      <div class="switch-auth">
-        <span>Already have an account? </span>
-        <button class="switch-auth-btn" onclick="showLoginModal()">Log In</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    let currentDate = new Date();
-    let selectedDate = null;
-
-    // Load data
-    const workoutHistory = JSON.parse(localStorage.getItem('workoutHistory') || '[]');
-    const plannedWorkouts = JSON.parse(localStorage.getItem('plannedWorkouts') || '{}');
-
-    // Initialize calendar
-    renderCalendar();
-
-    // Navigation buttons
-    document.getElementById('prevMonth').addEventListener('click', () => {
-      currentDate.setMonth(currentDate.getMonth() - 1);
-      renderCalendar();
-    });
-
-    document.getElementById('nextMonth').addEventListener('click', () => {
-      currentDate.setMonth(currentDate.getMonth() + 1);
-      renderCalendar();
-    });
-
-    document.getElementById('todayBtn').addEventListener('click', () => {
-      currentDate = new Date();
-      renderCalendar();
-    });
-
-    // Close modal
-    document.querySelector('.close-day-modal').addEventListener('click', () => {
-      document.getElementById('dayModal').style.display = 'none';
-    });
-
-    document.getElementById('dayModal').addEventListener('click', (e) => {
-      if (e.target.id === 'dayModal') {
-        document.getElementById('dayModal').style.display = 'none';
+      .calendar-day {
+        aspect-ratio: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #f8fafb;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+        padding: 8px;
       }
-    });
 
-    function renderCalendar() {
-      const year = currentDate.getFullYear();
-      const month = currentDate.getMonth();
-      
-      // Update header
-      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-                          'July', 'August', 'September', 'October', 'November', 'December'];
-      document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+      .calendar-day:hover {
+        background: #daedfa;
+        transform: scale(1.05);
+      }
 
-      // Get first day of month and total days
-      const firstDay = new Date(year, month, 1).getDay();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const today = new Date();
+      .calendar-day.empty {
+        background: transparent;
+        cursor: default;
+      }
 
-      // Build calendar grid
-      const grid = document.getElementById('calendarGrid');
-      grid.innerHTML = '';
+      .calendar-day.empty:hover {
+        transform: none;
+      }
 
-      // Day headers
-      const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      dayHeaders.forEach(day => {
-        const header = document.createElement('div');
-        header.className = 'calendar-day-header';
-        header.textContent = day;
-        grid.appendChild(header);
+      .calendar-day.today {
+        background: #5ab0c1;
+        color: white;
+        font-weight: 700;
+      }
+
+      .calendar-day.has-workout {
+        background: #0f222b;
+        color: white;
+        font-weight: 600;
+      }
+
+      .calendar-day.has-plan {
+        background: #a5a5a5;
+        color: white;
+        font-weight: 600;
+      }
+
+      /* Ensure 'today' color takes visual priority when multiple state classes exist */
+      .calendar-day.today.has-workout,
+      .calendar-day.today.has-plan,
+      .calendar-day.has-workout.today,
+      .calendar-day.has-plan.today {
+        background: #5ab0c1; /* today's color wins */
+        color: #0f222b;
+        font-weight: 700;
+      }
+
+      .day-number {
+        font-size: 16px;
+      }
+
+      .day-indicator {
+        font-size: 10px;
+        margin-top: 2px;
+      }
+
+      .legend {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #244f63;
+      }
+
+      .legend-box {
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+      }
+
+      /* Match these legend colors to the calendar grid colors for consistency */
+      .legend-box.today {
+        background: #5ab0c1;
+      }
+      .legend-box.workout {
+        background: #0f222b;
+      }
+      .legend-box.plan {
+        background: #a5a5a5;
+      }
+      /* Dark Blue Color: #0f222b */
+      /* Light Blue Color: #5ab0c1 */
+      /* Gray Color: #a5a5a5 */
+
+      /* Day Detail Modal */
+      .day-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 3000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .day-modal-content {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 500px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+      }
+
+      .close-day-modal {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #244f63;
+      }
+
+      .day-modal h3 {
+        color: #0f222b;
+        margin-bottom: 20px;
+      }
+
+      .workout-summary {
+        background: #f8fafb;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        border-left: 4px solid #4297a7;
+      }
+
+      .workout-summary h4 {
+        margin: 0 0 10px 0;
+        color: #1c3e4e;
+      }
+
+      .workout-summary p {
+        margin: 5px 0;
+        font-size: 14px;
+      }
+
+      .plan-form {
+        margin-top: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #1c3e4e;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #daedfa;
+        border-radius: 8px;
+        font-family: "Roboto Slab", serif;
+        font-size: 14px;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      .btn {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-family: "Roboto Slab", serif;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .btn-primary {
+        background: #4297a7;
+        color: white;
+        width: 100%;
+      }
+
+      .btn-primary:hover {
+        background: #5ab0c1;
+      }
+
+      .btn-danger {
+        background: #dc3545;
+        color: white;
+        margin-top: 10px;
+        width: 100%;
+      }
+
+      .btn-danger:hover {
+        background: #e65661;
+      }
+
+      .empty-day {
+        text-align: center;
+        color: #244f63;
+        font-style: italic;
+        padding: 20px;
+      }
+
+      @media (max-width: 600px) {
+        .calendar-day {
+          font-size: 12px;
+        }
+
+        .day-number {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-header"></div>
+
+    <header class="top-header">
+      <div class="header-left">
+        <img src="../icons/plus.png" alt="Add" class="plus-icon" />
+      </div>
+      <div class="auth-buttons">
+        <button class="login-btn">Log in</button>
+        <button class="signup-btn">Sign up</button>
+      </div>
+    </header>
+
+    <div class="calendar-container">
+      <h1>Calendar</h1>
+      <p>
+        Plan your workouts and track your <strong>training schedule</strong>
+      </p>
+
+      <div class="calendar-wrapper">
+        <div class="calendar-header">
+          <h2 id="currentMonth">January 2024</h2>
+          <div class="calendar-nav">
+            <button id="prevMonth">&lt; Prev</button>
+            <button id="todayBtn">Today</button>
+            <button id="nextMonth">Next &gt;</button>
+          </div>
+        </div>
+
+        <div class="calendar-grid" id="calendarGrid"></div>
+
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-box today"></div>
+            <span>Today</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-box workout"></div>
+            <span>Completed Workout</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-box plan"></div>
+            <span>Planned Workout</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day Detail Modal -->
+    <div id="dayModal" class="day-modal">
+      <div class="day-modal-content">
+        <button class="close-day-modal">&times;</button>
+        <h3 id="modalDate">January 1, 2024</h3>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="../index.html" class="nav-item">
+        <img src="../icons/home.png" alt="Home" class="nav-icon" />
+        <span class="nav-text">Home</span>
+      </a>
+      <a href="calendar.html" class="nav-item active">
+        <img src="../icons/calendar.png" alt="Calendar" class="nav-icon" />
+        <span class="nav-text">Calendar</span>
+      </a>
+      <a href="workouts.html" class="nav-item">
+        <img src="../icons/weight.png" alt="Workouts" class="nav-icon" />
+        <span class="nav-text">Workouts</span>
+      </a>
+      <a href="stats.html" class="nav-item">
+        <img src="../icons/menu.png" alt="Stats" class="nav-icon" />
+        <span class="nav-text">Stats</span>
+      </a>
+      <a href="settings.html" class="nav-item">
+        <img src="../icons/settings.png" alt="Settings" class="nav-icon" />
+        <span class="nav-text">Settings</span>
+      </a>
+    </nav>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="auth-modal">
+      <div class="auth-modal-content">
+        <button class="close-modal">&times;</button>
+        <h3>Log In to FitTracker</h3>
+        <form class="auth-form" id="loginForm">
+          <input type="email" class="auth-input" placeholder="Email" required />
+          <input
+            type="password"
+            class="auth-input"
+            placeholder="Password"
+            required
+          />
+          <button type="submit" class="auth-btn">Log In</button>
+        </form>
+        <div class="switch-auth">
+          <span>Don't have an account? </span>
+          <button class="switch-auth-btn" onclick="showSignupModal()">
+            Sign Up
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="auth-modal">
+      <div class="auth-modal-content">
+        <button class="close-modal">&times;</button>
+        <h3>Join FitTracker</h3>
+        <form class="auth-form" id="signupForm">
+          <input
+            type="text"
+            class="auth-input"
+            placeholder="Full Name"
+            required
+          />
+          <input type="email" class="auth-input" placeholder="Email" required />
+          <input
+            type="password"
+            class="auth-input"
+            placeholder="Password"
+            required
+          />
+          <input
+            type="password"
+            class="auth-input"
+            placeholder="Confirm Password"
+            required
+          />
+          <button type="submit" class="auth-btn">Create Account</button>
+        </form>
+        <div class="switch-auth">
+          <span>Already have an account? </span>
+          <button class="switch-auth-btn" onclick="showLoginModal()">
+            Log In
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let currentDate = new Date();
+      let selectedDate = null;
+
+      // Load data
+      const workoutHistory = JSON.parse(
+        localStorage.getItem("workoutHistory") || "[]"
+      );
+      const plannedWorkouts = JSON.parse(
+        localStorage.getItem("plannedWorkouts") || "{}"
+      );
+
+      // Initialize calendar
+      renderCalendar();
+
+      // Navigation buttons
+      document.getElementById("prevMonth").addEventListener("click", () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar();
       });
 
-      // Empty cells before first day
-      for (let i = 0; i < firstDay; i++) {
-        const empty = document.createElement('div');
-        empty.className = 'calendar-day empty';
-        grid.appendChild(empty);
-      }
+      document.getElementById("nextMonth").addEventListener("click", () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar();
+      });
 
-      // Days of month
-      for (let day = 1; day <= daysInMonth; day++) {
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const dayElement = document.createElement('div');
-        dayElement.className = 'calendar-day';
-        
-        // Check if today
-        if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
-          dayElement.classList.add('today');
+      document.getElementById("todayBtn").addEventListener("click", () => {
+        currentDate = new Date();
+        renderCalendar();
+      });
+
+      // Close modal
+      document
+        .querySelector(".close-day-modal")
+        .addEventListener("click", () => {
+          document.getElementById("dayModal").style.display = "none";
+        });
+
+      document.getElementById("dayModal").addEventListener("click", (e) => {
+        if (e.target.id === "dayModal") {
+          document.getElementById("dayModal").style.display = "none";
+        }
+      });
+
+      function renderCalendar() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        // Always read latest planned workouts from localStorage so UI reflects changes
+        const plannedWorkouts = JSON.parse(localStorage.getItem("plannedWorkouts") || "{}");
+
+        // Update header
+        const monthNames = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+        document.getElementById(
+          "currentMonth"
+        ).textContent = `${monthNames[month]} ${year}`;
+
+        // Get first day of month and total days
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const today = new Date();
+
+        // Build calendar grid
+        const grid = document.getElementById("calendarGrid");
+        grid.innerHTML = "";
+
+        // Day headers
+        const dayHeaders = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        dayHeaders.forEach((day) => {
+          const header = document.createElement("div");
+          header.className = "calendar-day-header";
+          header.textContent = day;
+          grid.appendChild(header);
+        });
+
+        // Empty cells before first day
+        for (let i = 0; i < firstDay; i++) {
+          const empty = document.createElement("div");
+          empty.className = "calendar-day empty";
+          grid.appendChild(empty);
         }
 
-        // Check for completed workouts
-        const hasWorkout = workoutHistory.some(w => w.date.startsWith(dateStr));
-        if (hasWorkout) {
-          dayElement.classList.add('has-workout');
-        }
+        // Days of month
+        for (let day = 1; day <= daysInMonth; day++) {
+          const dateStr = `${year}-${String(month + 1).padStart(
+            2,
+            "0"
+          )}-${String(day).padStart(2, "0")}`;
+          const dayElement = document.createElement("div");
+          dayElement.className = "calendar-day";
+          // add a data attribute so we can find this cell later when deleting a plan
+          dayElement.setAttribute('data-date', dateStr);
 
-        // Check for planned workouts
-        const hasPlan = plannedWorkouts[dateStr];
-        if (hasPlan && !hasWorkout) {
-          dayElement.classList.add('has-plan');
-        }
+          // Check if today
+          if (
+            year === today.getFullYear() &&
+            month === today.getMonth() &&
+            day === today.getDate()
+          ) {
+            dayElement.classList.add("today");
+          }
 
-        dayElement.innerHTML = `
+          // Check for completed workouts
+          const hasWorkout = workoutHistory.some((w) =>
+            w.date.startsWith(dateStr)
+          );
+          if (hasWorkout) {
+            dayElement.classList.add("has-workout");
+          }
+
+          // Check for planned workouts
+          const hasPlan = plannedWorkouts[dateStr];
+          if (hasPlan && !hasWorkout) {
+            dayElement.classList.add("has-plan");
+          }
+
+          dayElement.innerHTML = `
           <div class="day-number">${day}</div>
-          ${hasWorkout ? '<div class="day-indicator">✓</div>' : ''}
-          ${hasPlan && !hasWorkout ? '<div class="day-indicator">○</div>' : ''}
+          ${hasWorkout ? '<div class="day-indicator">✓</div>' : ""}
+          ${hasPlan && !hasWorkout ? '<div class="day-indicator">○</div>' : ""}
         `;
 
-        dayElement.addEventListener('click', () => showDayDetail(dateStr));
-        grid.appendChild(dayElement);
+          dayElement.addEventListener("click", () => showDayDetail(dateStr));
+          grid.appendChild(dayElement);
+        }
       }
-    }
 
-    function showDayDetail(dateStr) {
-      selectedDate = dateStr;
-      const modal = document.getElementById('dayModal');
-      const modalContent = document.getElementById('modalContent');
-      
-      // Format date for display
-      const date = new Date(dateStr + 'T12:00:00');
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      document.getElementById('modalDate').textContent = date.toLocaleDateString('en-US', options);
+      function showDayDetail(dateStr) {
+        selectedDate = dateStr;
+        const modal = document.getElementById("dayModal");
+        const modalContent = document.getElementById("modalContent");
 
-      // Get workouts and plans for this day
-      const dayWorkouts = workoutHistory.filter(w => w.date.startsWith(dateStr));
-      const dayPlan = plannedWorkouts[dateStr];
+        // Format date for display
+        const date = new Date(dateStr + "T12:00:00");
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        document.getElementById("modalDate").textContent =
+          date.toLocaleDateString("en-US", options);
 
-      let content = '';
+        // Get workouts and plans for this day
+        const dayWorkouts = workoutHistory.filter((w) => w.date.startsWith(dateStr));
+        // Read latest plannedWorkouts in case it was modified elsewhere
+        const plannedWorkouts = JSON.parse(localStorage.getItem("plannedWorkouts") || "{}");
+        const dayPlan = plannedWorkouts[dateStr];
 
-      // Show completed workouts
-      if (dayWorkouts.length > 0) {
-        content += '<h4 style="color: #0f222b; margin-bottom: 15px;">Completed Workouts</h4>';
-        dayWorkouts.forEach(workout => {
-          const time = new Date(workout.date).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-          content += `
-            <div class="workout-summary">
+        let content = "";
+
+        // Show completed workouts
+        if (dayWorkouts.length > 0) {
+          content +=
+            '<h4 style="color: #0f222b; margin-bottom: 15px;">Completed Workouts</h4>';
+          dayWorkouts.forEach((workout) => {
+            const time = new Date(workout.date).toLocaleTimeString("en-US", {
+              hour: "numeric",
+              minute: "2-digit",
+            });
+            // include a delete button for each completed workout (uses the ISO date as identifier)
+            content += `
+            <div class="workout-summary" data-workout-date="${workout.date}">
               <h4>Workout at ${time}</h4>
               <p><strong>Exercises:</strong> ${workout.exercises.length}</p>
               <p><strong>Total Volume:</strong> ${workout.totalVolume.toLocaleString()} lbs</p>
-              ${workout.exercises.slice(0, 3).map(ex => 
-                `<p style="margin-left: 10px;">• ${ex.name}: ${ex.sets}×${ex.reps} @ ${ex.weight}lbs</p>`
-              ).join('')}
-              ${workout.exercises.length > 3 ? '<p style="margin-left: 10px;">...</p>' : ''}
+              ${workout.exercises
+                .slice(0, 3)
+                .map(
+                  (ex) =>
+                    `<p style="margin-left: 10px;">• ${ex.name}: ${ex.sets}×${ex.reps} @ ${ex.weight}lbs</p>`
+                )
+                .join("")}
+              ${
+                workout.exercises.length > 3
+                  ? '<p style="margin-left: 10px;">...</p>'
+                  : ""
+              }
+              <button class="btn btn-danger delete-workout-btn" data-workout-date="${workout.date}">Delete Workout</button>
             </div>
           `;
-        });
-      }
+          });
+        }
 
-      // Show planned workout
-      if (dayPlan) {
-        content += '<h4 style="color: #0f222b; margin: 20px 0 15px 0;">Planned Workout</h4>';
-        content += `
+        // Show planned workout
+        if (dayPlan) {
+          content +=
+            '<h4 style="color: #0f222b; margin: 20px 0 15px 0;">Planned Workout</h4>';
+          content += `
           <div class="workout-summary" style="border-left-color: #ffc107;">
             <p><strong>${dayPlan.title}</strong></p>
             <p>${dayPlan.notes}</p>
-            <button class="btn btn-danger" onclick="deletePlan('${dateStr}')">Delete Plan</button>
+            <button id="deletePlanBtn" class="btn btn-danger">Delete Plan</button>
           </div>
         `;
-      }
+        }
 
-      // Add plan form for future dates
-      const isPastOrToday = new Date(dateStr + 'T23:59:59') <= new Date();
-      if (!isPastOrToday || !dayWorkouts.length) {
-        content += `
+        // Add plan form for future dates
+        const isPastOrToday = new Date(dateStr + "T23:59:59") <= new Date();
+        if (!isPastOrToday || !dayWorkouts.length) {
+          content += `
           <div class="plan-form">
-            <h4 style="color: #0f222b; margin-bottom: 15px;">${dayPlan ? 'Update' : 'Add'} Workout Plan</h4>
+            <h4 style="color: #0f222b; margin-bottom: 15px;">${
+              dayPlan ? "Update" : "Add"
+            } Workout Plan</h4>
             <form id="planForm">
               <div class="form-group">
                 <label>Workout Title</label>
-                <input type="text" id="planTitle" value="${dayPlan ? dayPlan.title : ''}" placeholder="e.g., Leg Day, Upper Body" required>
+                <input type="text" id="planTitle" value="${
+                  dayPlan ? dayPlan.title : ""
+                }" placeholder="e.g., Leg Day, Upper Body" required>
               </div>
               <div class="form-group">
                 <label>Notes</label>
-                <textarea id="planNotes" placeholder="e.g., 5x5 Squats, 3x10 Bench Press">${dayPlan ? dayPlan.notes : ''}</textarea>
+                <textarea id="planNotes" placeholder="e.g., 5x5 Squats, 3x10 Bench Press">${
+                  dayPlan ? dayPlan.notes : ""
+                }</textarea>
               </div>
               <button type="submit" class="btn btn-primary">Save Plan</button>
             </form>
           </div>
         `;
+        }
+
+        if (!dayWorkouts.length && !dayPlan && isPastOrToday) {
+          content =
+            '<div class="empty-day">No workouts logged for this day</div>' +
+            content;
+        }
+
+        modalContent.innerHTML = content;
+        modal.style.display = "flex";
+
+        // Attach delete plan handler for the dynamically-created button (avoids relying on inline onclick)
+        const deleteBtn = document.getElementById('deletePlanBtn');
+        if (deleteBtn) {
+          deleteBtn.addEventListener('click', () => {
+            // use the outer dateStr variable captured by closure
+            deletePlan(dateStr);
+          });
+        }
+
+        // Attach delete handlers for completed workouts shown in the modal
+        const deleteWorkoutButtons = modalContent.querySelectorAll('.delete-workout-btn');
+        if (deleteWorkoutButtons && deleteWorkoutButtons.length) {
+          deleteWorkoutButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              const wDate = btn.getAttribute('data-workout-date');
+              if (wDate) deleteCompletedWorkout(wDate);
+            });
+          });
+        }
+
+        // Attach form handler
+        const form = document.getElementById("planForm");
+        if (form) {
+          form.addEventListener("submit", handlePlanSubmit);
+        }
       }
 
-      if (!dayWorkouts.length && !dayPlan && isPastOrToday) {
-        content = '<div class="empty-day">No workouts logged for this day</div>' + content;
+      function handlePlanSubmit(e) {
+        e.preventDefault();
+        const title = document.getElementById("planTitle").value;
+        const notes = document.getElementById("planNotes").value;
+
+        const updatedPlans = JSON.parse(
+          localStorage.getItem("plannedWorkouts") || "{}"
+        );
+        updatedPlans[selectedDate] = { title, notes };
+        localStorage.setItem("plannedWorkouts", JSON.stringify(updatedPlans));
+
+        alert("Workout plan saved!");
+        document.getElementById("dayModal").style.display = "none";
+        location.reload(); // Refresh to show updated calendar
       }
 
-      modalContent.innerHTML = content;
-      modal.style.display = 'flex';
+      function deletePlan(dateStr) {
+        if (confirm("Delete this workout plan?")) {
+          const updatedPlans = JSON.parse(
+            localStorage.getItem("plannedWorkouts") || "{}"
+          );
+          delete updatedPlans[dateStr];
+          localStorage.setItem("plannedWorkouts", JSON.stringify(updatedPlans));
+          // Close modal first
+          document.getElementById("dayModal").style.display = "none";
+          // Immediately remove the 'has-plan' class and hollow indicator from the specific cell
+          const cell = document.querySelector(`[data-date="${dateStr}"]`);
+          if (cell) {
+            cell.classList.remove('has-plan');
+            const indicator = cell.querySelector('.day-indicator');
+            if (indicator && indicator.textContent.trim() === '○') {
+              indicator.remove();
+            }
+          }
+          // Re-render the calendar to ensure full sync with localStorage
+          renderCalendar();
+        }
+        }
 
-      // Attach form handler
-      const form = document.getElementById('planForm');
-      if (form) {
-        form.addEventListener('submit', handlePlanSubmit);
-      }
-    }
-
-    function handlePlanSubmit(e) {
-      e.preventDefault();
-      const title = document.getElementById('planTitle').value;
-      const notes = document.getElementById('planNotes').value;
-
-      const updatedPlans = JSON.parse(localStorage.getItem('plannedWorkouts') || '{}');
-      updatedPlans[selectedDate] = { title, notes };
-      localStorage.setItem('plannedWorkouts', JSON.stringify(updatedPlans));
-
-      alert('Workout plan saved!');
-      document.getElementById('dayModal').style.display = 'none';
-      location.reload(); // Refresh to show updated calendar
-    }
-
-    function deletePlan(dateStr) {
-      if (confirm('Delete this workout plan?')) {
-        const updatedPlans = JSON.parse(localStorage.getItem('plannedWorkouts') || '{}');
-        delete updatedPlans[dateStr];
-        localStorage.setItem('plannedWorkouts', JSON.stringify(updatedPlans));
-        document.getElementById('dayModal').style.display = 'none';
-        renderCalendar();
-      }
-    }
-  </script>
-</body>
+        // Delete a completed workout by its ISO date identifier
+        function deleteCompletedWorkout(workoutDate) {
+          if (!confirm('Delete this completed workout?')) return;
+          const history = JSON.parse(localStorage.getItem('workoutHistory') || '[]');
+          const newHistory = history.filter(w => w.date !== workoutDate);
+          localStorage.setItem('workoutHistory', JSON.stringify(newHistory));
+          // Remove the workout element from the modal if present
+          const modal = document.getElementById('dayModal');
+          const modalContent = document.getElementById('modalContent');
+          const elem = modalContent.querySelector(`[data-workout-date="${workoutDate}"]`);
+          if (elem) elem.remove();
+          // If no more workouts on this date, remove has-workout class and solid indicator from calendar cell
+          const dateOnly = workoutDate.startsWith(selectedDate) ? selectedDate : workoutDate.slice(0,10);
+          const remainingForDate = newHistory.filter(w => w.date.startsWith(dateOnly));
+          if (remainingForDate.length === 0) {
+            const cell = document.querySelector(`[data-date="${dateOnly}"]`);
+            if (cell) {
+              cell.classList.remove('has-workout');
+              const indicator = cell.querySelector('.day-indicator');
+              if (indicator && indicator.textContent.trim() === '●') indicator.remove();
+            }
+          }
+          // Re-render calendar to ensure UI sync
+          renderCalendar();
+        }
+      
+    </script>
+  </body>
 </html>

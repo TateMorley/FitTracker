@@ -14,6 +14,20 @@ h2 {
   margin-bottom: 0;
 }
 
+h4 {
+  font-family: "Roboto Slab", serif;
+  color: #0f222b;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+h5 {
+  font-family: "Roboto Slab", sans-serif;
+  color: #244f63;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 p {
   font-family: "Roboto Slab", sans-serif;
   color: #244f63;
@@ -45,7 +59,7 @@ p {
 }
 
 .nav-text {
-  font-family: "Roboto Slab", serif; /* Add this line */
+  font-family: "Roboto Slab", serif;
   font-size: 20px;
   display: block;
   margin-top: 1px;

@@ -1,7 +1,6 @@
 // Greeting stuff
 const currentHour = new Date().getHours();
 
-let greeting;
 let greetingTime;
 if (currentHour < 12) {
   greetingTime = "Morning";
@@ -11,9 +10,15 @@ if (currentHour < 12) {
   greetingTime = "Evening";
 }
 
-const greetingElement = document.getElementById("greeting");
-if (greetingElement) {
-  greetingElement.textContent = greeting;
+/**
+ * Set the greeting text in the UI. If a name is provided, include it.
+ * Example: "Good Evening" or "Good Evening, Sam"
+ */
+function setGreeting(name) {
+  const greetingElement = document.getElementById("greeting");
+  const base = `Good ${greetingTime}`;
+  const text = name ? `${base}, ${name}` : `${base}!`;
+  if (greetingElement) greetingElement.textContent = text;
 }
 
 // Set initial greeting (no name)
