@@ -6,7 +6,7 @@ public class ExerciseLibrary {
     public static final muscleGroup CHEST = new muscleGroup("Chest", 2, new String[] { "Upper Chest", "Lower Chest" });
     public static final muscleGroup BACK = new muscleGroup("Back", 4, new String[] { "Traps", "Middle Back", "Lower Back", "Lats" });
     public static final muscleGroup SHOULDERS = new muscleGroup("Shoulders", 3, new String[] { "Front deltoid", "Side deltoid", "Rear deltoid" });
-    public static final muscleGroup LEGS = new muscleGroup("Legs", 4, new String[] { "Quads", "Hamstrings", "Glutes", "Calves", "Adductors", "Abductors" });
+    public static final muscleGroup LEGS = new muscleGroup("Legs", 6, new String[] { "Quads", "Hamstrings", "Glutes", "Calves", "Adductors", "Abductors" });
     public static final muscleGroup ABS = new muscleGroup("Abs", 3, new String[] { "Upper abs", "Lower abs", "Obliques" });
     public static final muscleGroup FOREARMS = new muscleGroup("Forearms", 2, new String[] { "Inner Forearms", "Outer Forearms" });
 
@@ -272,22 +272,22 @@ public class ExerciseLibrary {
 
     // Leg Exercises----------------------------------------------
     // Machine exercises
-    public static final exercise SEATED_LEG_EXTENSION_MACHINE = new exercise("Seated Leg Extension Machine", LEGS, "Quadriceps", exercise.Classification.MACHINE);
+    public static final exercise SEATED_LEG_EXTENSION_MACHINE = new exercise("Seated Leg Extension Machine", LEGS, "Quads", exercise.Classification.MACHINE);
     public static final exercise SEATED_LEG_CURL_MACHINE = new exercise("Seated Leg Curl Machine", LEGS, "Hamstrings", exercise.Classification.MACHINE);
     public static final exercise LYING_LEG_CURL_MACHINE = new exercise("Lying Leg Curl Machine", LEGS, "Hamstrings", exercise.Classification.MACHINE);
     public static final exercise UPRIGHT_LEG_CURL_MACHINE = new exercise("Upright Leg Curl Machine", LEGS, "Hamstrings", exercise.Classification.MACHINE);
-    public static final exercise LEG_PRESS_MACHINE = new exercise("Leg Press Machine", LEGS, "Quadriceps", exercise.Classification.MACHINE);
-    public static final exercise SMITH_SQUAT = new exercise("Smith Squat", LEGS, "Quadriceps", exercise.Classification.MACHINE);
-    public static final exercise FRONT_SQUAT_MACHINE = new exercise("Front Squat Machine", LEGS, "Quadriceps", exercise.Classification.MACHINE);
+    public static final exercise LEG_PRESS_MACHINE = new exercise("Leg Press Machine", LEGS, "Quads", exercise.Classification.MACHINE);
+    public static final exercise SMITH_SQUAT = new exercise("Smith Squat", LEGS, "Quads", exercise.Classification.MACHINE);
+    public static final exercise FRONT_SQUAT_MACHINE = new exercise("Front Squat Machine", LEGS, "Quads", exercise.Classification.MACHINE);
     public static final exercise SMITH_ROMANIAN_DEADLIFT = new exercise("Smith Romanian Deadlift", LEGS, "Glutes", exercise.Classification.MACHINE);
     public static final exercise SMITH_GOOD_MORNING = new exercise("Smith Good Morning", LEGS, "Hamstrings", exercise.Classification.MACHINE);
     public static final exercise SMITH_STIFF_LEGGED_DEADLIFT = new exercise("Smith Stiff Legged Deadlift", LEGS, "Hamstrings", exercise.Classification.MACHINE);
     public static final exercise SMITH_DEADLIFT = new exercise("Smith Deadlift", LEGS, "Hamstrings", exercise.Classification.MACHINE);
     public static final exercise SMITH_HIP_THRUST = new exercise("Smith Hip Thrust", LEGS, "Glutes", exercise.Classification.MACHINE);
-    public static final exercise SMITH_REVERSE_LUNGE = new exercise("Smith Reverse Lunge", LEGS, "Quadriceps", exercise.Classification.MACHINE);
+    public static final exercise SMITH_REVERSE_LUNGE = new exercise("Smith Reverse Lunge", LEGS, "Quads", exercise.Classification.MACHINE);
     public static final exercise SMITH_SINGLE_LEG_DEADLIFT = new exercise("Smith Single Leg Deadlift", LEGS, "Hamstrings", exercise.Classification.MACHINE);
-    public static final exercise SMITH_BULGARIAN_SPLIT_LEG_SQUAT = new exercise("Smith Split Leg Squat", LEGS, "Quadriceps", exercise.Classification.MACHINE);
-    public static final exercise SMITH_SISSY_SQUAT = new exercise("Smith Sissy Squat", LEGS, "Quadriceps", exercise.Classification.MACHINE);
+    public static final exercise SMITH_BULGARIAN_SPLIT_LEG_SQUAT = new exercise("Smith Split Leg Squat", LEGS, "Quads", exercise.Classification.MACHINE);
+    public static final exercise SMITH_SISSY_SQUAT = new exercise("Smith Sissy Squat", LEGS, "Quads", exercise.Classification.MACHINE);
     public static final exercise STANDING_CALF_RAISE_MACHINE = new exercise("Standing Calf Raise Machine", LEGS, "Calves", exercise.Classification.MACHINE);
     public static final exercise SEATED_CALF_RAISE_MACHINE = new exercise("Seated Calf Raise Machine", LEGS, "Calves", exercise.Classification.MACHINE);
     public static final exercise HIP_ABDUCTION_MACHINE = new exercise("Hip Abduction Machine", LEGS, "Abductors", exercise.Classification.MACHINE);
@@ -296,96 +296,96 @@ public class ExerciseLibrary {
     public static final exercise HIP_THRUST_MACHINE = new exercise("Hip Thrust Machine", LEGS, "Glutes", exercise.Classification.MACHINE);
     public static final exercise KICKBACK_MACHINE = new exercise("Kickback Machine", LEGS, "Glutes", exercise.Classification.MACHINE);
     // Dumbbell exercises
-    public static final exercise DUMBBELL_BULGARIAN_SPLIT_SQUAT = new exercise("Dumbbell Bulgarian Split Squat", LEGS, "Quadriceps", exercise.Classification.DUMBBELL);
-    public static final exercise DUMBBELL_LUNGE = new exercise("Dumbbell Lunge", LEGS, "Quadriceps", exercise.Classification.DUMBBELL);
-    public static final exercise DUMBBELL_REVERSE_LUNGE = new exercise("Dumbbell Reverse Lunge", LEGS, "Quadriceps", exercise.Classification.DUMBBELL);
-    public static final exercise DUMBBELL_STEP_UP = new exercise("Dumbbell Step Up", LEGS, "Quadriceps", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_BULGARIAN_SPLIT_SQUAT = new exercise("Dumbbell Bulgarian Split Squat", LEGS, "Quads", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_LUNGE = new exercise("Dumbbell Lunge", LEGS, "Quads", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_REVERSE_LUNGE = new exercise("Dumbbell Reverse Lunge", LEGS, "Quads", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_STEP_UP = new exercise("Dumbbell Step Up", LEGS, "Quads", exercise.Classification.DUMBBELL);
     public static final exercise DUMBBELL_ROMANIAN_DEADLIFT = new exercise("Dumbbell Romanian Deadlift", LEGS, "Glutes", exercise.Classification.DUMBBELL);
-    public static final exercise DUMBBELL_SQUAT = new exercise("Dumbbell Squat", LEGS, "Quadriceps", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_SQUAT = new exercise("Dumbbell Squat", LEGS, "Quads", exercise.Classification.DUMBBELL);
     public static final exercise DUMBBELL_STIFF_LEGGED_DEADLIFT = new exercise("Dumbbell Stiff Legged Deadlift", LEGS, "Hamstrings", exercise.Classification.DUMBBELL);
     public static final exercise DUMBBELL_CALF_RAISE = new exercise("Dumbbell Calf Raise", LEGS, "Calves", exercise.Classification.DUMBBELL);
     public static final exercise DUMBBELL_HIP_THRUST = new exercise("Dumbbell Hip Thrust", LEGS, "Glutes", exercise.Classification.DUMBBELL);
-    public static final exercise DUMBBELL_GOBLET_SQUAT = new exercise("Dumbbell Goblet Squat", LEGS, "Quadriceps", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_GOBLET_SQUAT = new exercise("Dumbbell Goblet Squat", LEGS, "Quads", exercise.Classification.DUMBBELL);
     public static final exercise DUMBBELL_DEADLIFT = new exercise("Dumbbell Deadlift", LEGS, "Hamstrings", exercise.Classification.DUMBBELL);
     public static final exercise DUMBBELL_SINGLE_LEG_DEADLIFT = new exercise("Dumbbell Single Leg Deadlift", LEGS, "Hamstrings", exercise.Classification.DUMBBELL);
-    public static final exercise DUMBBELL_SUMO_SQUAT = new exercise("Dumbbell Sumo Squat", LEGS, "Quadriceps", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_SUMO_SQUAT = new exercise("Dumbbell Sumo Squat", LEGS, "Quads", exercise.Classification.DUMBBELL);
     // Barbell exercises
-    public static final exercise BARBELL_BACK_SQUAT = new exercise("Barbell Back Squat", LEGS, "Quadriceps", exercise.Classification.BARBELL);
-    public static final exercise BARBELL_FRONT_SQUAT = new exercise("Barbell Front Squat", LEGS, "Quadriceps", exercise.Classification.BARBELL);
-    public static final exercise BARBELL_LUNGE = new exercise("Barbell Lunge", LEGS, "Quadriceps", exercise.Classification.BARBELL);
-    public static final exercise BARBELL_REVERSE_LUNGE = new exercise("Barbell Reverse Lunge", LEGS, "Quadriceps", exercise.Classification.BARBELL);
-    public static final exercise BARBELL_STEP_UP = new exercise("Barbell Step Up", LEGS, "Quadriceps", exercise.Classification.BARBELL);
+    public static final exercise BARBELL_BACK_SQUAT = new exercise("Barbell Back Squat", LEGS, "Quads", exercise.Classification.BARBELL);
+    public static final exercise BARBELL_FRONT_SQUAT = new exercise("Barbell Front Squat", LEGS, "Quads", exercise.Classification.BARBELL);
+    public static final exercise BARBELL_LUNGE = new exercise("Barbell Lunge", LEGS, "Quads", exercise.Classification.BARBELL);
+    public static final exercise BARBELL_REVERSE_LUNGE = new exercise("Barbell Reverse Lunge", LEGS, "Quads", exercise.Classification.BARBELL);
+    public static final exercise BARBELL_STEP_UP = new exercise("Barbell Step Up", LEGS, "Quads", exercise.Classification.BARBELL);
     public static final exercise BARBELL_ROMANIAN_DEADLIFT = new exercise("Barbell Romanian Deadlift", LEGS, "Glutes", exercise.Classification.BARBELL);
     public static final exercise BARBELL_STIFF_LEGGED_DEADLIFT = new exercise("Barbell Stiff Legged Deadlift", LEGS, "Hamstrings", exercise.Classification.BARBELL);
     public static final exercise BARBELL_HIP_THRUST = new exercise("Barbell Hip Thrust", LEGS, "Glutes", exercise.Classification.BARBELL);
     public static final exercise BARBELL_DEADLIFT = new exercise("Barbell Deadlift", LEGS, "Hamstrings", exercise.Classification.BARBELL);
     public static final exercise BARBELL_SINGLE_LEG_DEADLIFT = new exercise("Barbell Single Leg Deadlift", LEGS, "Hamstrings", exercise.Classification.BARBELL);
     public static final exercise BARBELL_GOOD_MORNING = new exercise("Barbell Good Morning", LEGS, "Hamstrings", exercise.Classification.BARBELL);
-    public static final exercise BARBELL_BOX_SQUAT = new exercise("Barbell Box Squat", LEGS, "Quadriceps", exercise.Classification.BARBELL);
-    public static final exercise BARBELL_HACK_SQUAT = new exercise("Barbell Hack Squat", LEGS, "Quadriceps", exercise.Classification.BARBELL);
+    public static final exercise BARBELL_BOX_SQUAT = new exercise("Barbell Box Squat", LEGS, "Quads", exercise.Classification.BARBELL);
+    public static final exercise BARBELL_HACK_SQUAT = new exercise("Barbell Hack Squat", LEGS, "Quads", exercise.Classification.BARBELL);
     // Plate exercises
-    public static final exercise PLATE_LOADED_LINEAR_LEG_PRESS = new exercise("Plate Loaded Leg Press", LEGS, "Quadriceps", exercise.Classification.PLATE);
-    public static final exercise PLATE_LOADED_HACK_SQUAT = new exercise("Plate Loaded Hack Squat", LEGS, "Quadriceps", exercise.Classification.PLATE);
-    public static final exercise PLATE_LOADED_SISSY_HACK_SQUAT = new exercise("Plate Loaded Sissy Hack Squat", LEGS, "Quadriceps", exercise.Classification.PLATE);
-    public static final exercise PLATE_LOADED_LEG_EXTENSION = new exercise("Plate Loaded Leg Extension", LEGS, "Quadriceps", exercise.Classification.PLATE);
+    public static final exercise PLATE_LOADED_LINEAR_LEG_PRESS = new exercise("Plate Loaded Leg Press", LEGS, "Quads", exercise.Classification.PLATE);
+    public static final exercise PLATE_LOADED_HACK_SQUAT = new exercise("Plate Loaded Hack Squat", LEGS, "Quads", exercise.Classification.PLATE);
+    public static final exercise PLATE_LOADED_SISSY_HACK_SQUAT = new exercise("Plate Loaded Sissy Hack Squat", LEGS, "Quads", exercise.Classification.PLATE);
+    public static final exercise PLATE_LOADED_LEG_EXTENSION = new exercise("Plate Loaded Leg Extension", LEGS, "Quads", exercise.Classification.PLATE);
     public static final exercise PLATE_LOADED_LEG_CURL = new exercise("Plate Loaded Leg Curl", LEGS, "Hamstrings", exercise.Classification.PLATE);
     public static final exercise PLATE_LOADED_STANDING_CALF_RAISE = new exercise("Plate Loaded Standing Calf Raise", LEGS, "Calves", exercise.Classification.PLATE);
     public static final exercise PLATE_LOADED_SEATED_CALF_RAISE = new exercise("Plate Loaded Seated Calf Raise", LEGS, "Calves", exercise.Classification.PLATE);
     public static final exercise PLATE_LOADED_HIP_ABDUCTION = new exercise("Plate Loaded Hip Abduction", LEGS, "Abductors", exercise.Classification.PLATE);
     public static final exercise PLATE_LOADED_HIP_ADDUCTION = new exercise("Plate Loaded Hip Adduction", LEGS, "Adductors", exercise.Classification.PLATE);
     public static final exercise PLATE_LOADED_HIP_THRUST = new exercise("Plate Loaded Hip Thrust", LEGS, "Glutes", exercise.Classification.PLATE);
-    public static final exercise PLATE_LOADED_UPRIGHT_LEG_PRESS = new exercise("Upright Leg Press", LEGS, "Quadriceps", exercise.Classification.PLATE);
-    public static final exercise PLATE_LOADED_PENDULUM_SQUAT = new exercise("Pendulum Squat", LEGS, "Quadriceps", exercise.Classification.PLATE);
+    public static final exercise PLATE_LOADED_UPRIGHT_LEG_PRESS = new exercise("Upright Leg Press", LEGS, "Quads", exercise.Classification.PLATE);
+    public static final exercise PLATE_LOADED_PENDULUM_SQUAT = new exercise("Pendulum Squat", LEGS, "Quads", exercise.Classification.PLATE);
     public static final exercise PLATE_LOADED_UPRIGHT_LEG_CURL = new exercise("Upright Leg Curl", LEGS, "Hamstrings", exercise.Classification.PLATE);
     // Cable exercises
     public static final exercise CABLE_KICKBACK = new exercise("Cable Kickback", LEGS, "Glutes", exercise.Classification.CABLE);
     public static final exercise CABLE_HIP_ABDUCTION = new exercise("Cable Hip Abduction", LEGS, "Abductors", exercise.Classification.CABLE);
     public static final exercise CABLE_HIP_ADDUCTION = new exercise("Cable Hip Adduction", LEGS, "Adductors", exercise.Classification.CABLE);
-    public static final exercise CABLE_STEP_UP = new exercise("Cable Step Up", LEGS, "Quadriceps", exercise.Classification.CABLE);
+    public static final exercise CABLE_STEP_UP = new exercise("Cable Step Up", LEGS, "Quads", exercise.Classification.CABLE);
     public static final exercise SINGLE_LEG_DEADLIFT = new exercise("Cable Single Leg Deadlift", LEGS, "Hamstrings", exercise.Classification.CABLE);
-    public static final exercise CABLE_SQUAT = new exercise("Cable Squat", LEGS, "Quadriceps", exercise.Classification.CABLE);
-    public static final exercise CABLE_LUNGE = new exercise("Cable Lunge", LEGS, "Quadriceps", exercise.Classification.CABLE);
-    public static final exercise CABLE_BULGARIAN_SPLIT_SQUAT = new exercise("Cable Bulgarian Split Squat", LEGS, "Quadriceps", exercise.Classification.CABLE);
+    public static final exercise CABLE_SQUAT = new exercise("Cable Squat", LEGS, "Quads", exercise.Classification.CABLE);
+    public static final exercise CABLE_LUNGE = new exercise("Cable Lunge", LEGS, "Quads", exercise.Classification.CABLE);
+    public static final exercise CABLE_BULGARIAN_SPLIT_SQUAT = new exercise("Cable Bulgarian Split Squat", LEGS, "Quads", exercise.Classification.CABLE);
     // Calisthenic exercises
-    public static final exercise BODYWEIGHT_SQUAT = new exercise("Bodyweight Squat", LEGS, "Quadriceps", exercise.Classification.CALISTHENIC);
-    public static final exercise JUMP_SQUAT = new exercise("Jump Squat", LEGS, "Quadriceps", exercise.Classification.CALISTHENIC);
-    public static final exercise WALKING_LUNGE = new exercise("Walking Lunge", LEGS, "Quadriceps", exercise.Classification.CALISTHENIC);
-    public static final exercise BODYWEIGHT_BULGARIAN_SPLIT_SQUAT = new exercise("Bodyweight Bulgarian Split Squat", LEGS, "Quadriceps", exercise.Classification.CALISTHENIC);
+    public static final exercise BODYWEIGHT_SQUAT = new exercise("Bodyweight Squat", LEGS, "Quads", exercise.Classification.CALISTHENIC);
+    public static final exercise JUMP_SQUAT = new exercise("Jump Squat", LEGS, "Quads", exercise.Classification.CALISTHENIC);
+    public static final exercise WALKING_LUNGE = new exercise("Walking Lunge", LEGS, "Quads", exercise.Classification.CALISTHENIC);
+    public static final exercise BODYWEIGHT_BULGARIAN_SPLIT_SQUAT = new exercise("Bodyweight Bulgarian Split Squat", LEGS, "Quads", exercise.Classification.CALISTHENIC);
     public static final exercise SINGLE_LEG_GLUTE_BRIDGE = new exercise("Single Leg Glute Bridge", LEGS, "Glutes", exercise.Classification.CALISTHENIC);
     public static final exercise GLUTE_BRIDGE = new exercise("Glute Bridge", LEGS, "Glutes", exercise.Classification.CALISTHENIC);
     public static final exercise BODYWEIGHT_CALF_RAISE = new exercise("Bodyweight Calf Raise", LEGS, "Calves", exercise.Classification.CALISTHENIC);
-    public static final exercise PISTOL_SQUAT = new exercise("Pistol Squat", LEGS, "Quadriceps", exercise.Classification.CALISTHENIC);
-    public static final exercise BODYWEIGHT_STEP_UP = new exercise("Bodyweight Step Up", LEGS, "Quadriceps", exercise.Classification.CALISTHENIC);
-    public static final exercise BODYWEIGHT_LUNGE = new exercise("Bodyweight Lunge", LEGS, "Quadriceps", exercise.Classification.CALISTHENIC);
+    public static final exercise PISTOL_SQUAT = new exercise("Pistol Squat", LEGS, "Quads", exercise.Classification.CALISTHENIC);
+    public static final exercise BODYWEIGHT_STEP_UP = new exercise("Bodyweight Step Up", LEGS, "Quads", exercise.Classification.CALISTHENIC);
+    public static final exercise BODYWEIGHT_LUNGE = new exercise("Bodyweight Lunge", LEGS, "Quads", exercise.Classification.CALISTHENIC);
 
     // Other exercises
     public static final exercise TRAP_BAR_DEADLIFT = new exercise("Trap Bar Deadlift", LEGS, "Hamstrings", exercise.Classification.OTHER);
-    public static final exercise SAFETY_BAR_SQUAT = new exercise("Safety Bar Squat", LEGS, "Quadriceps", exercise.Classification.OTHER);
+    public static final exercise SAFETY_BAR_SQUAT = new exercise("Safety Bar Squat", LEGS, "Quads", exercise.Classification.OTHER);
 
     // Ab Exercises------------------------------------------------
     // Machine exercises
-    public static final exercise AB_CRUNCH_MACHINE = new exercise("Ab Crunch Machine", ABS, "Abs", exercise.Classification.MACHINE);
+    public static final exercise AB_CRUNCH_MACHINE = new exercise("Ab Crunch Machine", ABS, "Upper abs", exercise.Classification.MACHINE);
     public static final exercise OBLIQUE_TWIST_MACHINE = new exercise("Oblique Twist Machine", ABS, "Obliques", exercise.Classification.MACHINE);
     // Dumbbell exercises
     public static final exercise DUMBBELL_SIDE_BEND = new exercise("Dumbbell Side Bend", ABS, "Obliques", exercise.Classification.DUMBBELL);
-    public static final exercise DUMBBELL_WEIGHTED_CRUNCH = new exercise("Dumbbell Weighted Crunch", ABS, "Upper Abs", exercise.Classification.DUMBBELL);
-    public static final exercise DUMBBELL_WEIGHTED_DECLINE_CRUNCH = new exercise("Dumbbell Weighted Decline Crunch", ABS, "Upper Abs", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_WEIGHTED_CRUNCH = new exercise("Dumbbell Weighted Crunch", ABS, "Upper abs", exercise.Classification.DUMBBELL);
+    public static final exercise DUMBBELL_WEIGHTED_DECLINE_CRUNCH = new exercise("Dumbbell Weighted Decline Crunch", ABS, "Upper abs", exercise.Classification.DUMBBELL);
     public static final exercise DUMBBELL_RUSSIAN_TWIST = new exercise("Dumbbell Russian Twist", ABS, "Obliques", exercise.Classification.DUMBBELL);
     // Barbell exercises
 
     // Plate exercises
-    public static final exercise PLATE_WEIGHTED_CRUNCH = new exercise("Plate Weighted Crunch", ABS, "Upper Abs", exercise.Classification.PLATE);
-    public static final exercise PLATE_WEIGHTED_DECLINE_CRUNCH = new exercise("Plate Weighted Decline Crunch", ABS, "Upper Abs", exercise.Classification.PLATE);
+    public static final exercise PLATE_WEIGHTED_CRUNCH = new exercise("Plate Weighted Crunch", ABS, "Upper abs", exercise.Classification.PLATE);
+    public static final exercise PLATE_WEIGHTED_DECLINE_CRUNCH = new exercise("Plate Weighted Decline Crunch", ABS, "Upper abs", exercise.Classification.PLATE);
     public static final exercise PLATE_RUSSIAN_TWIST = new exercise("Plate Russian Twist", ABS, "Obliques", exercise.Classification.PLATE);
     // Cable exercises
-    public static final exercise CABLE_CRUNCH = new exercise("Cable Crunch", ABS, "Upper Abs", exercise.Classification.CABLE);
-    public static final exercise KNEELING_CABLE_CRUNCH = new exercise("Kneeling Cable Crunch", ABS, "Upper Abs", exercise.Classification.CABLE);
+    public static final exercise CABLE_CRUNCH = new exercise("Cable Crunch", ABS, "Upper abs", exercise.Classification.CABLE);
+    public static final exercise KNEELING_CABLE_CRUNCH = new exercise("Kneeling Cable Crunch", ABS, "Upper abs", exercise.Classification.CABLE);
     // Calisthenic exercises
-    public static final exercise HANGING_LEG_RAISE = new exercise("Hanging Leg Raise", ABS, "Lower Abs", exercise.Classification.CALISTHENIC);
-    public static final exercise BICYCLE_CRUNCH = new exercise("Bicycle Crunch", ABS, "Upper Abs", exercise.Classification.CALISTHENIC);
-    public static final exercise LYING_LEG_RAISE = new exercise("Leg Raise", ABS, "Lower Abs", exercise.Classification.CALISTHENIC);
+    public static final exercise HANGING_LEG_RAISE = new exercise("Hanging Leg Raise", ABS, "Lower abs", exercise.Classification.CALISTHENIC);
+    public static final exercise BICYCLE_CRUNCH = new exercise("Bicycle Crunch", ABS, "Upper abs", exercise.Classification.CALISTHENIC);
+    public static final exercise LYING_LEG_RAISE = new exercise("Leg Raise", ABS, "Lower abs", exercise.Classification.CALISTHENIC);
     public static final exercise RUSSIAN_TWIST = new exercise("Russian Twist", ABS, "Obliques", exercise.Classification.CALISTHENIC);
-    public static final exercise DECLINE_CRUNCH = new exercise("Decline Crunch", ABS, "Upper Abs", exercise.Classification.CALISTHENIC);
+    public static final exercise DECLINE_CRUNCH = new exercise("Decline Crunch", ABS, "Upper abs", exercise.Classification.CALISTHENIC);
     // Other exercises
 
     // 16 Forearm Exercises-------------------------------------------

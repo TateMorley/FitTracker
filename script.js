@@ -108,6 +108,12 @@ function updateUIForLoggedInUser() {
       logoutBtn.addEventListener("click", logout);
     }
     attachAuthButtonListeners();
+
+    // Hide the get started section if logged in
+    const getStartedSection = document.getElementById("getStartedSection");
+    if (getStartedSection) {
+      getStartedSection.style.display = "none";
+    }
   }
 }
 
@@ -166,6 +172,19 @@ function signup(name, email, password, confirmPassword) {
   return true;
 }
 
+function updateGetStartedSection() {
+  const getStartedSection = document.getElementById('getStartedSection');
+  const isLoggedIn = !!currentUser || !!localStorage.getItem("fitTrackerUser");
+
+  if (!getStartedSection) return;
+  
+  if (isLoggedIn) {
+    getStartedSection.style.display = 'none';
+  } else {
+    getStartedSection.style.display = 'block';
+  }
+}
+
 // Logout function
 function logout() {
   currentUser = null;
@@ -179,6 +198,12 @@ function logout() {
     `;
     attachAuthButtonListeners();
   }
+
+  const getStartedSection = document.getElementById("getStartedSection");
+  if (getStartedSection) {
+    getStartedSection.style.display = "block";
+  }
+
   // Reset greeting to generic
   setGreeting();
   alert("You have been logged out");

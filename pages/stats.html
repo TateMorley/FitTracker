@@ -33,16 +33,113 @@
     <p>View your progress and analytics</p>
     <p>Track your gains, PRs, and workout streaks here!</p>
 
-    <h4>Volume Lifted:</h4>
-    <h5>Week:</h5>
-    <h5>Month:</h5>
-    <h5>Year:</h5>
-    <h5>Total:</h5>
+    <h3>Volume Lifted:</h3>
+    <div class="stats-grid">
+      <div>
+        <h5>Week:</h5>
+        <div id = "volWeek">0</div>
+      </div>
+      <div>
+        <h5>Month:</h5>
+        <div id = "volMonth">0</div>
+      </div>
+      <div>
+        <h5>Year:</h5>
+        <div id = "volYear">0</div>
+      </div>
+      <div>
+        <h5>Total:</h5>
+        <div id = "volTotal">0</div>
+      </div>  
+    </div>
 
-    <h4>Favorite Muscle Groups</h4>
-    <h5>1. </h5>
-    <h5>2. </h5>
-    <h5>3. </h5>
+    <h3>Favorite Muscle Groups</h3>
+    <h5 id="fav1">1. -</h5>
+    <h5 id="fav2">2. -</h5>
+    <h5 id="fav3">3. -</h5>
+
+    <script>
+      (function renderStatsFromHistory()
+      {
+        const history = JSON.parse(localStorage.getItem("fitTrackerHistory")) || [];
+
+        function volumeForWorkout(workout)
+        {
+          if (typeof workout.totalVolume === 'number')
+          {
+            return workout.totalVolume;
+          }
+
+          if (Array.isArray(workout.exercises))
+          {
+            return workout.exercises.reduce((sum, exercise) => {
+              if (Array.isArray(exercise.sets)) {
+                return sum + exercise.sets.reduce((setSum, set) => {
+                  return setSum + (set.weight || 0) * (set.reps || 0);
+                }, 0);
+              }
+              return sum;
+            }, 0);
+          }
+          return 0;
+        }
+
+        const now = new Date();
+        const oneWeekAgo = new Date(now);
+        oneWeekAgo.setDate(now.getDate() - 7);
+        const oneMonthAgo = new Date(now);
+        oneMonthAgo.setMonth(now.getMonth() - 1);
+        const oneYearAgo = new Date(now);
+        oneYearAgo.setFullYear(now.getFullYear() - 1);
+
+        let volWeek = 0;
+        let volMonth = 0;
+        let volYear = 0;
+        let volTotal = 0;
+        const muscleGroupCounts = {};
+
+        history.forEach(workout => {
+          const workoutDate = new Date(workout.date);
+          const workoutVolume = volumeForWorkout(workout);
+          volTotal += workoutVolume;
+
+          if (workoutDate >= oneWeekAgo) {
+            volWeek += workoutVolume;
+          }
+          if (workoutDate >= oneMonthAgo) {
+            volMonth += workoutVolume;
+          }
+          if (workoutDate >= oneYearAgo) {
+            volYear += workoutVolume;
+          }
+
+          if (Array.isArray(workout.exercises)) {
+            workout.exercises.forEach(exercise => {
+              const group = exercise.muscleGroup || 'Other';
+              muscleGroupCounts[group] = (muscleGroupCounts[group] || 0) + 1;
+            });
+          }
+        });
+
+        function format(n)
+        {
+          return Number(n || 0).toLocaleString();
+        }
+
+        document.getElementById("volWeek").textContent = format(volWeek);
+        document.getElementById("volMonth").textContent = format(volMonth);
+        document.getElementById("volYear").textContent = format(volYear);
+        document.getElementById("volTotal").textContent = format(volTotal);
+
+        const sortedMuscleGroups = Object.entries(muscleGroupCounts)
+          .sort((a, b) => b[1] - a[1])
+          .map(entry => entry[0]);
+
+        document.getElementById("fav1").textContent = `1. ${sortedMuscleGroups[0] || '-'}`;
+        document.getElementById("fav2").textContent = `2. ${sortedMuscleGroups[1] || '-'}`;
+        document.getElementById("fav3").textContent = `3. ${sortedMuscleGroups[2] || '-'}`;
+      })();
+    </script>
 
     <nav class="bottom-nav">
       <a href="../index.html" class="nav-item">

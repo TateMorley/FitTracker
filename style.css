@@ -51,11 +51,12 @@ p {
 }
 
 .nav-item.active {
-  color: #224b5e;
-  /* margin-top: 5px;
-  margin-bottom: 11px;
-  font-size: 20px;
-  display: block; */
+  border: 2px solid #385e66;
+  border-radius: 8px;
+  background-color: #385e66;
+  color: white;
+  padding: 8px 12px;
+
 }
 
 .nav-text {
@@ -77,8 +78,7 @@ p {
 }
 
 .nav-item.active .nav-icon {
-  filter: invert(1) brightness(0) saturate(100%) invert(21%) sepia(23%)
-    saturate(1329%) hue-rotate(161deg) brightness(96%) contrast(88%);
+  filter: brightness(1) invert(0)
 }
 
 .nav-item {
@@ -365,3 +365,58 @@ body {
   background: #4297a7;
   color: #fff;
 }
+
+/*Scale items for mobile users*/
+@media (max-width: 768px)
+{
+  h1 {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  body {
+    margin-top: 60px;
+    margin-bottom: 70px;
+  }
+
+  .top-header {
+    height: 60px;
+    padding: 0 15px;
+  }
+
+  .plus-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .auth-buttons {
+    gap: 10px;
+  }
+
+  .login-btn,
+  .signup-btn {
+    padding: 6px 15px;
+    font-size: 14px;
+  }
+
+  .nav-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-text {
+    font-size: 14px;
+  }
+
+  .auth-modal-content {
+    max-width: 90%;
+  }
+}
+  
