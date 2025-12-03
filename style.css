@@ -46,17 +46,32 @@ p {
   /* box-shadow: 0 -2px 10 px rgba(0, 0, 0, 1); */
 }
 
+/* thin colored bar across the top of the taskbar */
+.bottom-nav::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 4px; /* thin bar height */
+  background: #385e66;
+  z-index: 9999; /* sit above nav items */
+}
+
 .nav-item:hover {
   color: #9bbbca;
 }
 
+.nav-item {
+  background-color: white;
+  flex: 1;
+}
+
 .nav-item.active {
   border: 2px solid #385e66;
-  border-radius: 8px;
   background-color: #385e66;
   color: white;
   padding: 8px 12px;
-
 }
 
 .nav-text {
@@ -75,6 +90,7 @@ p {
   filter: invert(1) brightness(0) saturate(100%) invert(38%) sepia(13%)
     saturate(937%) hue-rotate(161deg) brightness(93%) contrast(86%);
   transition: filter 0.3s; /* Smooth transition when switching */
+  
 }
 
 .nav-item.active .nav-icon {
@@ -117,7 +133,7 @@ body {
   left: 0;
   right: 0;
   height: 70px;
-  background-color: #0f222b;
+  background-color: #385e66;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -419,4 +435,58 @@ body {
     max-width: 90%;
   }
 }
-  
+
+.calendar {
+  width: 100%;
+  max-width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* core grid */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  align-items: start;
+}
+
+/* day cell sizing */
+.calendar-day {
+  padding: 8px;
+  min-height: 72px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* header/title */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+/* smaller screens: tighten spacing and font sizes */
+@media (max-width: 900px) {
+  .calendar-day { padding: 6px; min-height: 60px; font-size: 13px; }
+  .calendar-header { font-size: 15px; }
+}
+
+@media (max-width: 600px) {
+  .calendar-grid { gap: 6px; }
+  .calendar-day { padding: 4px; min-height: 48px; font-size: 12px; }
+  .calendar-header { font-size: 14px; }
+  .calendar-day .day-number { font-size: 12px; }
+
+  /* If layout still overflows, enable horizontal scrolling as a fallback.
+     Wrap your calendar HTML in a .calendar-wrapper (see next snippet). */
+  .calendar-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Prevent grid from squishing too small when you want scroll behavior */
+  .calendar-grid.scrollable {
+    min-width: 420px; /* adjust (7 * ~60px) so cells stay legible */
+  }
+}
